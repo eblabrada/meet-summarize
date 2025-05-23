@@ -28,12 +28,10 @@ def transcribir_directorio_a_texto(directorio, modelo='base', save_text=False):
         print(f"[{i+1}/{len(archivos)}] Transcribiendo: {nombre_archivo}...")
         resultado = model.transcribe(path_completo)
         texto = resultado["text"]
-        texto_completo += f"\n--- Transcripción de {nombre_archivo} ---\n"
+        # texto_completo += f"\n--- Transcripción de {nombre_archivo} ---\n"
         texto_completo += texto.strip() + "\n"
 
     with open("transcripcion_completa.txt", "w", encoding="utf-8") as f:
         f.write(texto_completo)
 
     return texto_completo
-
-texto = transcribir_directorio_a_texto("data/news_report_fragmentos", modelo="base")

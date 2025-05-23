@@ -41,6 +41,3 @@ def cortar_audio_en_fragmentos(path_audio, duracion_segmento=30):
         print(f"Fragmento creado: {nombre_fragmento}")
 
     return fragmentos
-
-
-print (cortar_audio_en_fragmentos("data/news_report.mp3"))
