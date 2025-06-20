@@ -1,37 +1,22 @@
 import os
 import whisper
 
-def transcribir_directorio_a_texto(directorio, modelo='base', save_text=False):
-    """
-    Transcribe todos los archivos de audio en un directorio usando Whisper.
-
-    Args:
-        directorio (str): Ruta al directorio que contiene los archivos de audio.
-        modelo (str): Modelo de Whisper a usar. Puede ser: 'tiny', 'base', 'small', 'medium', 'large'.
-
-    Returns:
-        str: Texto resultante de concatenar todas las transcripciones.
-    """
-
-    archivos = sorted([
-        f for f in os.listdir(directorio)
+def transcribe(dir, model='base', save_text=False):
+    files = sorted([
+        f for f in os.listdir(dir)
         if f.lower().endswith(('.mp3', '.wav', '.m4a', '.flac', '.ogg'))
     ])
 
-    print(f"Cargando modelo Whisper: {modelo}...")
-    model = whisper.load_model(modelo)
+    print(f"Cargando modelo Whisper: {model}...")
+    model = whisper.load_model(model)
 
-    texto_completo = ""
+    for i, name in enumerate(files):
+        fpath = os.path.join(dir, name)
+        print(f"[{i+1}/{len(files)}] Transcribiendo: {name}...")
+        current = model.transcribe(fpath, fp16=False)
+        text = current["text"]
 
-    for i, nombre_archivo in enumerate(archivos):
-        path_completo = os.path.join(directorio, nombre_archivo)
-        print(f"[{i+1}/{len(archivos)}] Transcribiendo: {nombre_archivo}...")
-        resultado = model.transcribe(path_completo)
-        texto = resultado["text"]
-        # texto_completo += f"\n--- Transcripción de {nombre_archivo} ---\n"
-        texto_completo += texto.strip() + "\n"
+        with open(f"{name.split('.')[0] + "_transcribe"}.txt", "w", encoding="utf-8") as f:
+            f.write(text.strip())
 
-    with open("transcripcion_completa.txt", "w", encoding="utf-8") as f:
-        f.write(texto_completo)
-
-    return texto_completo
+# transcribe('data/')
