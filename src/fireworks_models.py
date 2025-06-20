@@ -9,10 +9,10 @@ class FireworksModel(BaseLLM):
         :param model_name: Nombre del modelo en Fireworks (ej: 'accounts/fireworks/models/firefunction-v1')
         :param api_key: Clave API de Fireworks.ai
         """
-        self.api_key = api_key or os.getenv("FIREWORKS_API_KEY")
+        self.api_key = api_key
         if not self.api_key:
             raise ValueError("FIREWORKS_API_KEY no está definida")
-        
+        print(self.api_key)
         self.client = OpenAI(
             api_key=self.api_key,
             base_url="https://api.fireworks.ai/inference/v1"

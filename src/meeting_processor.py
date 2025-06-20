@@ -20,6 +20,7 @@ class MeetingProcessor:
         """
         Resume la reunión usando el modelo de lenguaje.
         """
+        
         if not self.transcript:
             raise ValueError("No hay transcripción cargada")
 
@@ -32,6 +33,7 @@ class MeetingProcessor:
         """
         Intenta identificar quién habló y qué dijo.
         """
+        
         if not self.transcript:
             raise ValueError("No hay transcripción cargada")
 
@@ -44,6 +46,7 @@ class MeetingProcessor:
         """
         Rellena una planilla virtual en base a una descripción (por ejemplo, 'nombre del proyecto, fecha, responsables').
         """
+        
         if not self.transcript:
             raise ValueError("No hay transcripción cargada")
 
@@ -56,6 +59,7 @@ class MeetingProcessor:
         """
         Permite hacer preguntas sobre la reunión.
         """
+        
         if not self.transcript:
             raise ValueError("No hay transcripción cargada")
 

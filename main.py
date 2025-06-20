@@ -12,7 +12,10 @@ API_KEY = os.getenv('API_KEY', ' ')
 llm = FireworksModel(model_name="accounts/fireworks/models/llama-v3p1-8b-instruct", api_key=API_KEY)
 processor = MeetingProcessor(llm)
 
-transcription = transcribe(".")
+transcribe('data/')
+
+with open('news_report_transcribe.txt', 'r', encoding='utf8') as f:
+  transcription = f.read()
 
 processor.set_transcript(transcription)
 
