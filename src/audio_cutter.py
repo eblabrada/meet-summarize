@@ -15,14 +15,14 @@ def cut_audio(audio_path, segment_len=30):
 
     os.makedirs(output, exist_ok=True)
 
-    fragmentos = []
+    result = []
     for i in range(0, total, len_ms):
-        fragmento = audio[i:i + len_ms]
-        nombre_fragmento = os.path.join(output, f"{name}_part{i // len_ms + 1}{extension}")
-        fragmento.export(nombre_fragmento, format=extension[1:])  # quitar el punto de la extensión
-        fragmentos.append(nombre_fragmento)
-        print(f"Fragmento creado: {nombre_fragmento}")
+        fragment = audio[i:i + len_ms]
+        fragment_name = os.path.join(output, f"{name}_part{i // len_ms + 1}{extension}")
+        fragment.export(fragment_name, format=extension[1:])  # quitar el punto de la extensión
+        result.append(fragment_name)
+        print(f"Fragmento creado: {fragment_name}")
 
-    return fragmentos
+    return result
 
 # cut_audio('data/news_report.wav')
